@@ -544,11 +544,13 @@ ARM Macro Assembler    Page 9
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=reefer_zet6_rtthread\startup_stm32f103xe.d -oreefer_zet6_rtthread\
-startup_stm32f103xe.o -I.\RTE\_Reefer_ZET6_RTThread -IE:\MDK5.36\Packs\ARM\CMSI
-S\5.8.0\CMSIS\Core\Include -IE:\MDK5.36\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\I
-nclude --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 536"
- --predefine="_RTE_ SETA 1" --predefine="STM32F10X_HD SETA 1" --predefine="_RTE
-_ SETA 1" --list=startup_stm32f103xe.lst startup_stm32f103xe.s
+startup_stm32f103xe.o -I.\RTE\RTOS -I.\RTE\_Reefer_ZET6_RTThread -IE:\MDK5.36\P
+acks\ARM\CMSIS\5.8.0\CMSIS\Core\Include -IE:\MDK5.36\Packs\Keil\STM32F1xx_DFP\2
+.3.0\Device\Include -IE:\MDK5.36\Packs\RealThread\RT-Thread\3.1.5\components\fi
+nsh -IE:\MDK5.36\Packs\RealThread\RT-Thread\3.1.5\include --predefine="__MICROL
+IB SETA 1" --predefine="__UVISION_VERSION SETA 536" --predefine="_RTE_ SETA 1" 
+--predefine="STM32F10X_HD SETA 1" --predefine="_RTE_ SETA 1" --list=startup_stm
+32f103xe.lst startup_stm32f103xe.s
 
 
 

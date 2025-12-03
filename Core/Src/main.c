@@ -21,6 +21,7 @@
 #include "spi.h"
 #include "usart.h"
 #include "gpio.h"
+#include "rtthread.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -71,14 +72,14 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+  //HAL_Init();
 
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
 
   /* Configure the system clock */
-  SystemClock_Config();
+  //SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
 
@@ -87,7 +88,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_SPI1_Init();
-  MX_USART1_UART_Init();
+  //MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -99,8 +100,15 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-      HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_5); 
-     HAL_Delay(200);
+//if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_RXNE))
+//    {
+//        uint8_t data = huart1.Instance->DR & 0xFF; // 读取
+//        HAL_UART_Transmit(&huart1, &data, 1, 10);  // 发回
+//    }
+    /* ------------------ */
+
+    HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_5); // 红灯闪
+    rt_thread_mdelay(100); // 改快一点，提高响应速度
   }
   /* USER CODE END 3 */
 }
