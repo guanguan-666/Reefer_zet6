@@ -31,7 +31,9 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "SX1278.h"
+#include "SX1278_hw.h"
+#include "fuzzyPID.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -62,8 +64,10 @@ void Error_Handler(void);
 #define LORA_DIO0_EXTI_IRQn EXTI2_IRQn
 #define LORA_RST_Pin GPIO_PIN_3
 #define LORA_RST_GPIO_Port GPIOA
-#define LORA_NSS_Pin GPIO_PIN_4
+#define LED1_Pin GPIO_PIN_5
+#define LED1_GPIO_Port GPIOB
 #define LORA_NSS_GPIO_Port GPIOA
+#define LORA_NSS_Pin GPIO_PIN_4
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

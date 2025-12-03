@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xE</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc; ../Drivers/STM32F1xx_HAL_Driver/Inc; ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy; ../Drivers/CMSIS/Device/ST/STM32F1xx/Include; ../Drivers/CMSIS/Include</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../My_Drivers\Lora;../My_drivers/FuzzyPID</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -521,6 +521,59 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>My_Drivers</GroupName>
+          <Files>
+            <File>
+              <FileName>bsp_lora.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\My_Drivers\bsp_lora.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_pid_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\My_Drivers\app_pid_test.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>My_Drivers/Lora</GroupName>
+          <Files>
+            <File>
+              <FileName>SX1278.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\My_Drivers\Lora\SX1278.c</FilePath>
+            </File>
+            <File>
+              <FileName>SX1278_hw.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\My_Drivers\Lora\SX1278_hw.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Application/App</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Application/Cmd</GroupName>
+          <Files>
+            <File>
+              <FileName>cmd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\Cmd\cmd.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>My_Drivers/FuzzyPID</GroupName>
+          <Files>
+            <File>
+              <FileName>fuzzyPID.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\My_Drivers\FuzzyPID\fuzzyPID.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
         <Group>
@@ -587,5 +640,14 @@
       </file>
     </files>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>Reefer_ZET6_RTThread</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>

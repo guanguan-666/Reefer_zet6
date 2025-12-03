@@ -40,3 +40,10 @@ reefer_zet6_rtthread\finsh_port.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx
 reefer_zet6_rtthread\finsh_port.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 reefer_zet6_rtthread\finsh_port.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 reefer_zet6_rtthread\finsh_port.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
+reefer_zet6_rtthread\finsh_port.o: ../My_Drivers\Lora/SX1278.h
+reefer_zet6_rtthread\finsh_port.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\stdbool.h
+reefer_zet6_rtthread\finsh_port.o: ../My_Drivers\Lora/SX1278_hw.h
+reefer_zet6_rtthread\finsh_port.o: ../My_drivers/FuzzyPID/fuzzyPID.h
+reefer_zet6_rtthread\finsh_port.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\math.h
+reefer_zet6_rtthread\finsh_port.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\stdlib.h
+reefer_zet6_rtthread\finsh_port.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\stdio.h

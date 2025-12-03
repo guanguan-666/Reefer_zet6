@@ -21,10 +21,10 @@
 #include "spi.h"
 #include "usart.h"
 #include "gpio.h"
-#include "rtthread.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <rtthread.h>
 
 /* USER CODE END Includes */
 
@@ -56,7 +56,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+extern int LoRa_Init(void);
 /* USER CODE END 0 */
 
 /**
@@ -72,14 +72,14 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  //HAL_Init();
+  HAL_Init();
 
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
 
   /* Configure the system clock */
-  //SystemClock_Config();
+  SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
 
@@ -88,9 +88,10 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_SPI1_Init();
-  //MX_USART1_UART_Init();
+  MX_USART1_UART_Init();
+  
   /* USER CODE BEGIN 2 */
-
+    LoRa_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -107,7 +108,13 @@ int main(void)
 //    }
     /* ------------------ */
 
-    HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_5); // 红灯闪
+    //HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_5); // 红灯闪
+              // 翻转 PB5 (LED_RED)
+        //HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5); 
+        // 串口打印，证明系统活着
+        //rt_kprintf("RT-Thread is running on STM32F103ZET6...\n");
+        
+        // 延时 500ms (交出 CPU 使用权)
     rt_thread_mdelay(100); // 改快一点，提高响应速度
   }
   /* USER CODE END 3 */
