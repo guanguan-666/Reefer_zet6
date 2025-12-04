@@ -21,10 +21,12 @@
 #include "spi.h"
 #include "usart.h"
 #include "gpio.h"
+#include "bsp_lora.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <rtthread.h>
+
 
 /* USER CODE END Includes */
 
@@ -56,7 +58,36 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-extern int LoRa_Init(void);
+/**
+ * @brief  统一启动用户线程的函数
+ * 放在这里管理，避免 main 函数太乱
+ */
+void User_App_Start(void)
+{
+    rt_thread_t tid;
+
+/* ================== 创建 LoRa 接收线程 ================== */
+    /* * lora_rx_thread_entry: 在 bsp_lora.c 中定义
+     * 栈大小: 1024 (1KB)，如果后续发现栈溢出可以改大
+     * 优先级: 25 (RT-Thread 默认范围0-31, 25属于中低优先级，不影响关键系统任务)
+     * 时间片: 10 tick
+     */
+    tid = rt_thread_create("lora_rx",
+                           lora_rx_thread_entry, RT_NULL,
+                           1024, 25, 10); // 栈1024, 优先级25, 时间片10
+    if (tid != RT_NULL) {
+        rt_thread_startup(tid);
+        rt_kprintf("[Main] LoRa RX Thread Started.\n");
+    }else {
+        rt_kprintf("[Main] Error: LoRa RX Thread Create Failed!\n");
+    }
+
+    /* 2. 如果以后有PID线程或者其他业务线程，都在这里创建 */
+    /* tid = rt_thread_create("pid_task", pid_thread_entry, ...);
+    if (tid != RT_NULL) rt_thread_startup(tid);
+    */
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -91,7 +122,21 @@ int main(void)
   MX_USART1_UART_Init();
   
   /* USER CODE BEGIN 2 */
-    LoRa_Init();
+    rt_kprintf("System Starting...\n");
+
+  /* 1. 初始化 LoRa 硬件 */
+  /* 先初始化硬件，成功了再跑线程，防止线程跑起来去操作还没初始化的SPI */
+  if (LoRa_Init() == RT_EOK) 
+  {
+      rt_kprintf("[Main] LoRa Hardware Init Success.\n");
+      
+      /* 2. 启动用户线程 */
+      User_App_Start();
+  }
+  else
+  {
+      rt_kprintf("[Main] LoRa Init Failed! Check Wiring.\n");
+  }
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -101,20 +146,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-//if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_RXNE))
-//    {
-//        uint8_t data = huart1.Instance->DR & 0xFF; // 读取
-//        HAL_UART_Transmit(&huart1, &data, 1, 10);  // 发回
-//    }
-    /* ------------------ */
 
-    //HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_5); // 红灯闪
-              // 翻转 PB5 (LED_RED)
-        //HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5); 
-        // 串口打印，证明系统活着
-        //rt_kprintf("RT-Thread is running on STM32F103ZET6...\n");
-        
-        // 延时 500ms (交出 CPU 使用权)
     rt_thread_mdelay(100); // 改快一点，提高响应速度
   }
   /* USER CODE END 3 */

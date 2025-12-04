@@ -1,9 +1,8 @@
 #include "rtthread.h"
 #include "main.h"   // 引入CubeMX生成的头文件，以便识别 GPIOE/GPIOB 等宏
 #include <string.h> // 用于 strcmp 比较字符串
-
+#include "bsp_lora.h"
 extern  SX1278_t lora;
-
 /* ====== 开关灯 测试命令 ====== */
 /* * 命令格式: led [color] [action]
  * 示例: 
@@ -84,4 +83,15 @@ void lora_test(void)
 MSH_CMD_EXPORT(lora_test, check lora connection);
 
 
-
+/* * 用于测试发送 
+ * 在终端输入: lora_send hello 即可发送
+ */
+void lora_send(int argc, char** argv)
+{
+    if (argc > 1) {
+        LoRa_Send_Data((uint8_t*)argv[1], strlen(argv[1]));
+    } else {
+        rt_kprintf("Usage: lora_send <message>\n");
+    }
+}
+MSH_CMD_EXPORT(lora_send, Send LoRa message);

@@ -39,6 +39,7 @@ reefer_zet6_rtthread\main.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\stdio.h
 reefer_zet6_rtthread\main.o: ../Core/Inc/spi.h
 reefer_zet6_rtthread\main.o: ../Core/Inc/usart.h
 reefer_zet6_rtthread\main.o: ../Core/Inc/gpio.h
+reefer_zet6_rtthread\main.o: ..\My_Drivers\bsp_lora.h
 reefer_zet6_rtthread\main.o: E:\MDK5.36\Packs\RealThread\RT-Thread\3.1.5\include\rtthread.h
 reefer_zet6_rtthread\main.o: .\RTE\RTOS\rtconfig.h
 reefer_zet6_rtthread\main.o: .\RTE\RTOS\finsh_config.h

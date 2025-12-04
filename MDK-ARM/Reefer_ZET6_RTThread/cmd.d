@@ -46,3 +46,4 @@ reefer_zet6_rtthread\cmd.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\math.h
 reefer_zet6_rtthread\cmd.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\stdlib.h
 reefer_zet6_rtthread\cmd.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\stdio.h
 reefer_zet6_rtthread\cmd.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\string.h
+reefer_zet6_rtthread\cmd.o: ..\My_Drivers\bsp_lora.h

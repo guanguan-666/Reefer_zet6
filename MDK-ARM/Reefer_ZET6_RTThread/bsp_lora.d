@@ -45,3 +45,5 @@ reefer_zet6_rtthread\bsp_lora.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\stdarg.h
 reefer_zet6_rtthread\bsp_lora.o: E:\MDK5.36\Packs\RealThread\RT-Thread\3.1.5\include\rtservice.h
 reefer_zet6_rtthread\bsp_lora.o: E:\MDK5.36\Packs\RealThread\RT-Thread\3.1.5\components\finsh\finsh_api.h
 reefer_zet6_rtthread\bsp_lora.o: E:\MDK5.36\Packs\RealThread\RT-Thread\3.1.5\components\finsh\finsh_config.h
+reefer_zet6_rtthread\bsp_lora.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\string.h
+reefer_zet6_rtthread\bsp_lora.o: ..\My_Drivers\bsp_lora.h
