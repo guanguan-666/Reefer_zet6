@@ -44,7 +44,7 @@ int LoRa_Init(void)
     /* 参数依据你的论文设计：433MHz, 17dBm, SF9, BW125kHz */
     /*[cite: 1]: 论文中提到 SF9, BW125k, 433MHz */
     SX1278_init(&lora, 433000000, SX1278_POWER_17DBM, SX1278_LORA_SF_9,
-                SX1278_LORA_BW_125KHZ, SX1278_LORA_CR_4_5, SX1278_LORA_CRC_EN, 10);
+                SX1278_LORA_BW_125KHZ, SX1278_LORA_CR_4_5, SX1278_LORA_CRC_EN, 64);
 
     /* 4. 验证是否成功 (读取版本号) */
     // 0x42 是 Version 寄存器地址，SX1278 的默认值通常是 0x12

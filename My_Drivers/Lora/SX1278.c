@@ -149,18 +149,23 @@ int SX1278_LoRaEntryRx(SX1278_t *module, uint8_t length, uint32_t timeout) {
 	//SX1278_SPIWrite(module, LR_RegOpMode,0x05);	//Continuous Rx Mode //High Frequency Mode
 	module->readBytes = 0;
 
-	while (1) {
-		if ((SX1278_SPIRead(module, LR_RegModemStat) & 0x04) == 0x04) {	//Rx-on going RegModemStat
-			module->status = RX;
-			return 1;
-		}
-		if (--timeout == 0) {
-			SX1278_hw_Reset(module->hw);
-			SX1278_config(module);
-			return 0;
-		}
-		SX1278_hw_DelayMs(1);
-	}
+/* ====== 删除以下阻塞等待代码 ====== */
+    /* while (1) {
+        if ((SX1278_SPIRead(module, LR_RegModemStat) & 0x04) == 0x04) {
+            module->status = RX;
+            return 1;
+        }
+        if (--timeout == 0) {
+            SX1278_hw_Reset(module->hw); // 罪魁祸首：超时复位
+            SX1278_config(module);
+            return 0;
+        }
+        SX1278_hw_DelayMs(1);
+    }
+    */
+    /* ================================= */
+    module->status = RX; // 直接标记状态为 RX
+    return 1;
 }
 
 uint8_t SX1278_LoRaRxPacket(SX1278_t *module) {
@@ -202,6 +207,7 @@ int SX1278_LoRaEntryTx(SX1278_t *module, uint8_t length, uint32_t timeout) {
 	addr = SX1278_SPIRead(module, LR_RegFifoTxBaseAddr); //RegFiFoTxBaseAddr
 	SX1278_SPIWrite(module, LR_RegFifoAddrPtr, addr); //RegFifoAddrPtr
 
+    
 	while (1) {
 		temp = SX1278_SPIRead(module, LR_RegPayloadLength);
 		if (temp == length) {

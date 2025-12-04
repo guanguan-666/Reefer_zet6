@@ -1,7 +1,23 @@
 #include "fuzzyPID.h"
 #include "rtthread.h"
+#include "bsp_lora.h" // [新增] 引入LoRa驱动头文件
+#include <string.h>
 
 #define DOF 6
+
+
+/* ====== 1. 修改协议结构体 ====== */
+/* 使用 __packed 关键字 (Keil/ARMCC 专用) 或 #pragma pack */
+/* 为了保险，我们用最通用的写法 */
+
+#pragma pack(push, 1) // 压栈并强制1字节对齐
+typedef struct {
+    uint8_t  head;      // 0: 帧头
+    uint8_t  dev_id;    // 1: ID
+    float    temp;      // 2-5: 温度 (无填充)
+    uint32_t seq;       // 6-9: 序号
+} LoraPacket_t;
+#pragma pack(pop)     // 恢复默认对齐
 
 /* 1. 【关键修改】将大数组移到函数外部，并加上 static 关键字 */
 /* 这样它们就不占线程栈空间了，而是占全局内存 */
@@ -101,3 +117,71 @@ void pid_sim(void)
     rt_kprintf("Simulation Finished.\n");
 }
 MSH_CMD_EXPORT(pid_sim, Run Fuzzy PID Simulation);
+
+
+/* ====== 修复后的 pid_test 函数 (手动打包模式) ====== */
+void pid_test(void)
+{
+    rt_kprintf("Starting PID + LoRa Manual Packing Test...\n");
+
+    // 1. 初始化 PID (保持原样)
+    struct PID **pid_vector = fuzzy_pid_vector_init(fuzzy_pid_params, 2.0f, 4, 1, 0, mf_params, rule_base, DOF);
+    if (!pid_vector) return;
+
+    int control_id = 5; 
+    float real = 20.0f; // 初始温度
+    float idea = max_error * 0.9f; 
+    bool direct[DOF] = {true, false, false, false, true, true};
+
+    // 2. 定义关键变量
+    // 【关键】必须是 static，否则每次函数退出或栈刷新会导致序号归零
+    static uint32_t global_seq = 0; 
+    
+    // 发送缓冲区：固定 10 字节
+    // [0]: Head, [1]: ID, [2-5]: Temp, [6-9]: Seq
+    uint8_t tx_buf[10]; 
+
+    for (int j = 0; j < 2000; ++j) { // 运行 40秒
+        // PID 计算
+        int out = fuzzy_pid_motor_pwd_output(real, idea, direct[control_id], pid_vector[control_id]);
+        
+        // 模拟温度波动：让温度稍微变动一下，方便观察
+        real += 0.01f; 
+        if (real > 30.0f) real = 20.0f;
+
+        // 3. 每 1秒 (50次 * 20ms) 发送一次
+        if (j % 50 == 0) {
+            // --- 手动打包 (Manual Packing) ---
+            tx_buf[0] = 0xAA;       // 帧头
+            tx_buf[1] = 0x01;       // 设备ID
+            
+            // 拷贝温度 float (4字节) 到 buf[2]~buf[5]
+            memcpy(&tx_buf[2], &real, 4);
+            
+            // 拷贝序号 uint32 (4字节) 到 buf[6]~buf[9] (强制小端序 Little Endian)
+            tx_buf[6] = (uint8_t)(global_seq & 0xFF);
+            tx_buf[7] = (uint8_t)((global_seq >> 8) & 0xFF);
+            tx_buf[8] = (uint8_t)((global_seq >> 16) & 0xFF);
+            tx_buf[9] = (uint8_t)((global_seq >> 24) & 0xFF);
+
+            // 打印日志方便对比
+            int r_int = (int)real;
+            int r_dec = (int)((real - r_int) * 100);
+            if(r_dec<0) r_dec = -r_dec;
+            rt_kprintf("[TX] Seq:%d | Temp:%d.%02d\n", global_seq, r_int, r_dec);
+
+            // 发送
+            LoRa_Send_Data(tx_buf, 10);
+            
+            // 序号递增
+            global_seq++;
+        }
+        rt_thread_mdelay(20); 
+    }
+
+    delete_pid_vector(pid_vector, DOF);
+    rt_kprintf("Test Finished.\n");
+}
+MSH_CMD_EXPORT(pid_test, Run PID Manual Pack);
+
+
