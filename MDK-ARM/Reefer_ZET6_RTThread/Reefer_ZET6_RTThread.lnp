@@ -25,6 +25,7 @@
 "reefer_zet6_rtthread\system_stm32f1xx.o"
 "reefer_zet6_rtthread\bsp_lora.o"
 "reefer_zet6_rtthread\app_pid_test.o"
+"reefer_zet6_rtthread\app_lora_node.o"
 "reefer_zet6_rtthread\sx1278.o"
 "reefer_zet6_rtthread\sx1278_hw.o"
 "reefer_zet6_rtthread\cmd.o"

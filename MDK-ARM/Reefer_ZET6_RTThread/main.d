@@ -49,3 +49,4 @@ reefer_zet6_rtthread\main.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\stdarg.h
 reefer_zet6_rtthread\main.o: E:\MDK5.36\Packs\RealThread\RT-Thread\3.1.5\include\rtservice.h
 reefer_zet6_rtthread\main.o: E:\MDK5.36\Packs\RealThread\RT-Thread\3.1.5\components\finsh\finsh_api.h
 reefer_zet6_rtthread\main.o: E:\MDK5.36\Packs\RealThread\RT-Thread\3.1.5\components\finsh\finsh_config.h
+reefer_zet6_rtthread\main.o: ..\My_Drivers\app_lora_protocol.h

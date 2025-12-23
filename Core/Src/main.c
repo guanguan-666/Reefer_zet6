@@ -25,8 +25,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <rtthread.h>
-
-
+#include "app_lora_protocol.h"
+extern int App_LoRa_Init(void);
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -122,19 +122,23 @@ int main(void)
   /* USER CODE BEGIN 2 */
     rt_kprintf("System Starting...\n");
 
-  /* 1. 初始化 LoRa 硬件 */
-  /* 先初始化硬件，成功了再跑线程，防止线程跑起来去操作还没初始化的SPI */
-  if (LoRa_Init() == RT_EOK) 
-  {
-      rt_kprintf("[Main] LoRa Hardware Init Success.\n");
-      
-      /* 2. 启动用户线程 */
-      User_App_Start();
-  }
-  else
-  {
-      rt_kprintf("[Main] LoRa Init Failed! Check Wiring.\n");
-  }
+//  /* 1. 初始化 LoRa 硬件 */
+//  /* 先初始化硬件，成功了再跑线程，防止线程跑起来去操作还没初始化的SPI */
+//  if (LoRa_Init() == RT_EOK) 
+//  {
+//      rt_kprintf("[Main] LoRa Hardware Init Success.\n");
+//      
+//      /* 2. 启动用户线程 */
+//      User_App_Start();
+//  }
+//  else
+//  {
+//      rt_kprintf("[Main] LoRa Init Failed! Check Wiring.\n");
+//  }
+  
+  rt_kprintf("System Init Done. Starting LoRa...\n");
+  App_LoRa_Init();
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */

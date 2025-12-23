@@ -1,8 +1,6 @@
 reefer_zet6_rtthread\sx1278_hw.o: ..\My_Drivers\Lora\SX1278_hw.c
 reefer_zet6_rtthread\sx1278_hw.o: ..\My_Drivers\Lora\SX1278_hw.h
 reefer_zet6_rtthread\sx1278_hw.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\stdint.h
-reefer_zet6_rtthread\sx1278_hw.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\string.h
-reefer_zet6_rtthread\sx1278_hw.o: ../Core/Inc/gpio.h
 reefer_zet6_rtthread\sx1278_hw.o: ../Core/Inc/main.h
 reefer_zet6_rtthread\sx1278_hw.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
 reefer_zet6_rtthread\sx1278_hw.o: ../Core/Inc/stm32f1xx_hal_conf.h
@@ -39,13 +37,4 @@ reefer_zet6_rtthread\sx1278_hw.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\math.h
 reefer_zet6_rtthread\sx1278_hw.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\stdlib.h
 reefer_zet6_rtthread\sx1278_hw.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\stdio.h
 reefer_zet6_rtthread\sx1278_hw.o: ..\My_Drivers\bsp_lora.h
-reefer_zet6_rtthread\sx1278_hw.o: ../Core/Inc/spi.h
-reefer_zet6_rtthread\sx1278_hw.o: E:\MDK5.36\Packs\RealThread\RT-Thread\3.1.5\include\rtthread.h
-reefer_zet6_rtthread\sx1278_hw.o: .\RTE\RTOS\rtconfig.h
-reefer_zet6_rtthread\sx1278_hw.o: .\RTE\RTOS\finsh_config.h
-reefer_zet6_rtthread\sx1278_hw.o: E:\MDK5.36\Packs\RealThread\RT-Thread\3.1.5\include\rtdebug.h
-reefer_zet6_rtthread\sx1278_hw.o: E:\MDK5.36\Packs\RealThread\RT-Thread\3.1.5\include\rtdef.h
-reefer_zet6_rtthread\sx1278_hw.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\stdarg.h
-reefer_zet6_rtthread\sx1278_hw.o: E:\MDK5.36\Packs\RealThread\RT-Thread\3.1.5\include\rtservice.h
-reefer_zet6_rtthread\sx1278_hw.o: E:\MDK5.36\Packs\RealThread\RT-Thread\3.1.5\components\finsh\finsh_api.h
-reefer_zet6_rtthread\sx1278_hw.o: E:\MDK5.36\Packs\RealThread\RT-Thread\3.1.5\components\finsh\finsh_config.h
+reefer_zet6_rtthread\sx1278_hw.o: E:\MDK5.36\ARM\ARMCC\Bin\..\include\string.h

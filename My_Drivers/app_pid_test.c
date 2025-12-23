@@ -184,4 +184,12 @@ void pid_test(void)
 }
 MSH_CMD_EXPORT(pid_test, Run PID Manual Pack);
 
+// 在 app_pid_test.c 中添加
+void Get_System_Status(float *temp, float *hum, float *pid_out) {
+    // 这里暂时返回模拟数据
+    // 后续替换为 DS18B20 或 DHT11 的读取函数
+    *temp = 25.5f; 
+    *hum = 60.2f;
+    *pid_out = 120.0f; // 假设这是 PID 计算出的电机转速或电流值
+}
 

@@ -533,6 +533,11 @@
               <FileType>1</FileType>
               <FilePath>..\My_Drivers\app_pid_test.c</FilePath>
             </File>
+            <File>
+              <FileName>app_lora_node.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\My_Drivers\app_lora_node.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

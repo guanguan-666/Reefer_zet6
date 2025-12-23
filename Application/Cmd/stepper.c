@@ -99,7 +99,7 @@ static int stepper_init(void)
     if (stepper_tid != RT_NULL) rt_thread_startup(stepper_tid);
     return 0;
 }
-INIT_APP_EXPORT(stepper_init);
+//INIT_APP_EXPORT(stepper_init);
 
 /* ================= FinSH 命令函数 ================= */
 /* * 命令: motor_rev <圈数> <时间秒>
